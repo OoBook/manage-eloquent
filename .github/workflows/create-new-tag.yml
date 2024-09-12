@@ -5,12 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   create-tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Create Tag
-        uses: pantheon-systems/autotag@v1
+        uses: pantheon-systems/autotag@v0
         with:
           scheme: conventional
+          gh-token: ${{ github.token }}
+
