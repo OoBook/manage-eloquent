@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Create Tag
-        uses: pantheon-systems/autotag@v0
+      - uses: pantheon-systems/action-autotag@v0
         with:
           scheme: conventional
           gh-token: ${{ github.token }}
