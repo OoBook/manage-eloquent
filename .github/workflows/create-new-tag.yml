@@ -1,0 +1,16 @@
+name: Automatic Tag Generation with autotag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create Tag
+        uses: pantheon-systems/autotag@v1
+        with:
+          scheme: conventional
