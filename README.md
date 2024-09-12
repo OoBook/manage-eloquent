@@ -3,9 +3,10 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/oobook/manage-eloquent.svg?style=flat-square)](https://packagist.org/packages/oobook/manage-eloquent)
 [![Total Downloads](https://img.shields.io/packagist/dt/oobook/manage-eloquent.svg?style=flat-square)](https://packagist.org/packages/oobook/manage-eloquent)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/oobook/manage-eloquent/run-php-tests?label=Tests)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
 
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package will help out you to manage the laravel eloquent model relationships, table columns and column types.
 
 ## Installation
 
