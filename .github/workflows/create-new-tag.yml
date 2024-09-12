@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Create Tag
       - uses: pantheon-systems/action-autotag@v0
         with:
           scheme: conventional
