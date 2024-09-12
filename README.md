@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/oobook/manage-eloquent.svg?style=flat-square)](https://packagist.org/packages/oobook/manage-eloquent)
 [![Total Downloads](https://img.shields.io/packagist/dt/oobook/manage-eloquent.svg?style=flat-square)](https://packagist.org/packages/oobook/manage-eloquent)
-![GitHub Actions](https://github.com/oobook/manage-eloquent/actions/workflows/main.yml/badge.svg)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/oobook/manage-eloquent/run-php-tests?label=Tests)
 
 
@@ -32,8 +31,8 @@ class Product extends Model
     use ManageEloquent;
 
     protected $fillable = [
-		'name'
-	];
+        'name'
+    ];
 
 
     public function tags(): \Illuminate\Database\Eloquent\Relations\MorphToMany
@@ -46,9 +45,7 @@ class Product extends Model
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(
-            Category::class,
-        );
+        return $this->belongsTo(Category::class);
     }
 
 }
