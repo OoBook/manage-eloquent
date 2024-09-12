@@ -5,9 +5,6 @@ on:
   push:
     tags:
       - "v*"
-      # - 'v[0-9]+\.[0-9]+\.[0-9]+'
-      # - "v(\d+)\.(?!0\.0$)(\d+)\.(\d+)"
-
 
 # Automatically create a Github Release, with release details specified (the relevant commits)
 jobs:
