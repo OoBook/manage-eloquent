@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '**.md'
 
 permissions:
   contents: write
@@ -13,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pantheon-systems/action-autotag@v0
+      - uses: oobook/automated-tag@v0.1.0
         with:
           scheme: conventional
           gh-token: ${{ github.token }}
