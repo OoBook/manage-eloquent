@@ -17,6 +17,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oobook/automated-tag@v0.1.0
         with:
-          scheme: conventional
+          # scheme: conventional
           gh-token: ${{ github.token }}
 
