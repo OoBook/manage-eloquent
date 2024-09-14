@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oobook/automated-tag@v0.2.11
+      - uses: oobook/automated-tag@v0.2.12
         with:
           # scheme: conventional
           gh-token: ${{ github.token }}
