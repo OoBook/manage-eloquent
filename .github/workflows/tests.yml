@@ -1,4 +1,4 @@
-name: run-tests
+name: tests
 
 on:
   push:
@@ -6,11 +6,15 @@ on:
         - main
     paths-ignore:
       - '**.md'
+      - '**.yml'
+      - '**.yaml'
   pull_request:
     branches:
       - main
     paths-ignore:
       - '**.md'
+      - '**.yml'
+      - '**.yaml'
 
 jobs:
   test:

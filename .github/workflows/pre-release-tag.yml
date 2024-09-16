@@ -1,4 +1,4 @@
-name: "Release Tag"
+name: "PreRelease Tag"
 
 # Run on every commit tag which begins with 'v' except BREAKING Change
 on:
