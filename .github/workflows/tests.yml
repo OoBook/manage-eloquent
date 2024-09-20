@@ -3,7 +3,8 @@ name: tests
 on:
   push:
     branches:
-        - main
+      - main
+      - dev
     paths-ignore:
       - '**.md'
       - '**.yml'
@@ -11,6 +12,7 @@ on:
   pull_request:
     branches:
       - main
+      - dev
     paths-ignore:
       - '**.md'
       - '**.yml'
