@@ -1,9 +1,18 @@
 # Manage the laravel eloquent model relationships, table columns and column types
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/oobook/manage-eloquent.svg?style=flat-square)](https://packagist.org/packages/oobook/manage-eloquent)
+[![Main](https://img.shields.io/github/actions/workflow/status/oobook/manage-eloquent/tests.yml?label=tests&logo=github-actions)](https://github.com/oobook/manage-eloquent/actions?workflow=tests)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/oobook/manage-eloquent.svg?style=flat-square&logo=packagist)](https://packagist.org/packages/oobook/manage-eloquent)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/oobook/manage-eloquent?label=release&logo=GitHub)](https://github.com/oobook/manage-eloquent/releases)
 [![Total Downloads](https://img.shields.io/packagist/dt/oobook/manage-eloquent.svg?style=flat-square)](https://packagist.org/packages/oobook/manage-eloquent)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/oobook/manage-eloquent/run-php-tests?label=Tests)
-[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/oobook/manage-eloquent/tests?label=tests)
+
+<!-- <p align="center">
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/oobook/manage-eloquent/run-tests)
+<a href="https://github.com/oobook/automated-tag/actions"><img src="https://github.com/oobook/automated-tag/workflows/main/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/oobook/post-redirector"><img src="https://img.shields.io/packagist/dt/oobook/post-redirector" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/oobook/post-redirector"><img src="https://img.shields.io/packagist/v/oobook/post-redirector" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/oobook/post-redirector"><img src="https://img.shields.io/packagist/l/oobook/post-redirector" alt="License"></a> 
+</p> -->
 
 
 This package will help out you to manage the laravel eloquent model relationships, table columns and column types.
