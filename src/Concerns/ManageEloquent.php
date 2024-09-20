@@ -7,15 +7,26 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
-
+/**
+ * Trait to manage Eloquent models.
+ */
 trait ManageEloquent
 {
+    /**
+     * Cached defined relationships.
+     */
     private static $_definedRelationships = [];
 
+    /**
+     * Model cache keys.
+     */
     protected $modelCacheKeys = [
         'column_types',
     ];
 
+    /**
+     * Boot the trait and cache defined relationships.
+     */
     public static function bootManageEloquent()
     {
         $relationClassesPattern = "|" . preg_quote(config('manage-eloquent.relations_namespace'), "|") . "|";
@@ -34,6 +45,12 @@ trait ManageEloquent
             });
     }
 
+    /**
+     * Get defined relations.
+     *
+     * @param array|string|null $relations Optional list of relation names to filter.
+     * @return array
+     */
     public function definedRelations($relations = null): array
     {
         $class = get_called_class();
@@ -51,7 +68,12 @@ trait ManageEloquent
 
         return array_keys($definedRelationships);
     }
-
+    /**
+     * Get defined relation types.
+     *
+     * @param array|string|null $relations Optional list of relation names to filter.
+     * @return array
+     */
     public function definedRelationsTypes($relations = null): array
     {
         $class = get_called_class();
@@ -70,6 +92,12 @@ trait ManageEloquent
         return $definedRelationships;
     }
 
+    /**
+     * Check if a relation exists.
+     *
+     * @param string $relationName The relation name.
+     * @return bool
+     */
     public function hasRelation($relationName): bool
     {
         $class = get_called_class();
@@ -79,6 +107,12 @@ trait ManageEloquent
         return array_key_exists($relationName, $definedRelationships);
     }
 
+    /**
+     * Get the relation type.
+     *
+     * @param string $relationName The relation name.
+     * @return string|false
+     */
     public function getRelationType($relationName): string
     {
         $class = get_called_class();
@@ -100,21 +134,43 @@ trait ManageEloquent
         return in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses_recursive($this));
     }
 
+    /**
+     * Check if a column exists.
+     *
+     * @param string $column The column name.
+     * @return bool
+     */
     public function hasColumn($column): bool
     {
         return $this->getConnection()->getSchemaBuilder()->hasColumn($this->getTable(), $column);
     }
 
+    /**
+     * Get timestamp columns.
+     *
+     * @return array
+     */
     public function getTimestampColumns(): array
     {
         return array_keys(array_filter($this->getColumnTypes(), fn($val) => $val === 'timestamp' || $val === 'datetime'));
     }
 
+    /**
+     * Check if a column is a timestamp column.
+     *
+     * @param string $column The column name.
+     * @return bool
+     */
     public function isTimestampColumn($column): bool
     {
         return in_array($column, $this->getTimestampColumns());
     }
 
+    /**
+     * Get column types.
+     *
+     * @return array
+     */
     public function getColumnTypes(): array
     {
         $columnsKey = get_class($this) . "_column_types";
@@ -134,6 +190,11 @@ trait ManageEloquent
         }
     }
 
+    /**
+     * Get column names.
+     *
+     * @return array
+     */
     public function getColumns(): array
     {
         return array_keys($this->getColumnTypes());
