@@ -14,27 +14,29 @@ class RelationsTest extends TestCase
     }
 
     /** @test */
-    public function it_should_be_all_relations_of_defined_relations_of_company()
-    {
-        $company = new Company();
-
-        $this->assertTrue(json_encode($company->definedRelations()) == json_encode(['users']) );
-    }
-
-    /** @test */
-    public function it_should_be_has_many_of_defined_relations_of_company()
-    {
-        $company = new Company();
-
-        $this->assertTrue(json_encode($company->definedRelations('HasMany')) == json_encode(['users']) );
-    }
-
-    /** @test */
-    public function it_should_be_morph_many_of_defined_relations_of_user()
+    public function it_should_match_defined_relations_of_models()
     {
         $model = new User();
 
-        $this->assertTrue(json_encode($model->definedRelations('morphMany')) == json_encode(['files']) );
+        $this->assertEquals($model->definedRelations('morphMany'), ['files']);
+
+        $company = new Company();
+
+        $this->assertEquals($company->definedRelations(), ['users']);
+        $this->assertEquals($company->definedRelations('HasMany'), ['users'] );
     }
 
+    /** @test */
+    public function it_should_match_defined_relation_types_of_models()
+    {
+        $model = new User();
+
+        $this->assertEquals($model->definedRelationsTypes(), ['company' => 'BelongsTo', 'files' => 'MorphMany']);
+        $this->assertEquals($model->definedRelationsTypes('BelongsTo'), ['company' => 'BelongsTo']);
+
+        $model = new Company();
+
+        $this->assertEquals($model->definedRelationsTypes(), ['users' => 'HasMany']);
+        $this->assertEquals($model->definedRelationsTypes('BelongsTo'), []);
+    }
 }
