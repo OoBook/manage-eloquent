@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - main
+      - _main
     tags-ignore:
       - v*
     paths-ignore:
@@ -14,7 +14,7 @@ permissions:
   contents: write
 
 jobs:
-  create-tag:
+  create-tag-prerelease:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
