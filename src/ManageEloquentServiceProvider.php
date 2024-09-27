@@ -12,7 +12,7 @@ class ManageEloquentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        DB::connection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+        DB::connection()->getDoctrineConnection()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
 
         /*
          * Optional methods to load your package assets
