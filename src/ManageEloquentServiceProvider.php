@@ -3,6 +3,7 @@
 namespace Oobook\Database\Eloquent;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class ManageEloquentServiceProvider extends ServiceProvider
 {
@@ -11,6 +12,8 @@ class ManageEloquentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        DB::connection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+
         /*
          * Optional methods to load your package assets
          */
