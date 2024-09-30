@@ -12,15 +12,10 @@ class ManageEloquentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        DB::connection()
-            ->getDoctrineConnection()
-            ->getDatabasePlatform()
-            ->registerDoctrineTypeMapping('enum', 'string');
 
         /*
          * Optional methods to load your package assets
          */
-
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('manage-eloquent.php'),

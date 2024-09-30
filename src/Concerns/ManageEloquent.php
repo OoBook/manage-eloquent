@@ -5,6 +5,7 @@ namespace Oobook\Database\Eloquent\Concerns;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 /**
@@ -178,11 +179,10 @@ trait ManageEloquent
         if (Cache::has($columnsKey)) {
             return Cache::get($columnsKey);
         }else{
-            $builder = $this->getConnection()->getSchemaBuilder();
-
-            $columnTypes = Collection::make($builder->getColumnListing($this->getTable()))
-                ->mapWithKeys(fn($column) => [$column => $builder->getColumnType($this->getTable(), $column)])
+            $columnTypes = Collection::make(Schema::getColumnListing($this->getTable()))
+                ->mapWithKeys(fn ($column) => [$column => Schema::getColumnType($this->getTable(), $column)] )
                 ->toArray();
+
 
             Cache::put($columnsKey, $columnTypes);
 
