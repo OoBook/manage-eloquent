@@ -179,10 +179,9 @@ trait ManageEloquent
         if (Cache::has($columnsKey)) {
             return Cache::get($columnsKey);
         }else{
-            $columnTypes = Collection::make(Schema::getColumnListing($this->getTable()))
-                ->mapWithKeys(fn ($column) => [$column => Schema::getColumnType($this->getTable(), $column)] )
+            $columnTypes = Collection::make(Schema::getColumns($this->getTable()))
+                ->mapWithKeys(fn ($column, $attr) => [$column['name'] => $column['type_name'] ] )
                 ->toArray();
-
 
             Cache::put($columnsKey, $columnTypes);
 
