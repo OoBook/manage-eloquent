@@ -2,6 +2,17 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.0.3 - 2024-10-01
+
+### :wrench: Bug Fixes
+
+- get types with Schema::getColumns for custom types like enum by @OoBook in https://github.com/OoBook/manage-eloquent/commit/e6fce9574a93a8b199b6396962bdce54614b6fa9
+- remove laravel 9 and php 8.0 support by @OoBook in https://github.com/OoBook/manage-eloquent/commit/2be3e78165568c0b6000fcbe2375092a665c8353
+
+### :beers: Other Stuff
+
+- Update CHANGELOG file
+
 ## v1.0.2 - 2024-09-30
 
 ### :wrench: Bug Fixes
