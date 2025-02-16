@@ -5,5 +5,16 @@
  */
 return [
     'relations_namespace' => 'Illuminate\Database\Eloquent\Relations',
-    'column_type_key' => 'columns_key'
+    'cache' => [
+        'column_types' => [
+            'enabled' => true,
+            'key' => 'column_types',
+            'ttl' => 86400, // 1 day
+        ],
+        // 'relationships' => [
+        //     'enabled' => true,
+        //     'key' => 'relationships',
+        //     'ttl' => 86400, // 1 day
+        // ],
+    ],
 ];

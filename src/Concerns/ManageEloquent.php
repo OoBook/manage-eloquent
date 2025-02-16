@@ -16,14 +16,7 @@ trait ManageEloquent
     /**
      * Cached defined relationships.
      */
-    private static $_definedRelationships = [];
-
-    /**
-     * Model cache keys.
-     */
-    protected $modelCacheKeys = [
-        'column_types',
-    ];
+    private static $manageEloquentDefinedRelationships = [];
 
     /**
      * Boot the trait and cache defined relationships.
@@ -32,11 +25,11 @@ trait ManageEloquent
     {
         $relationClassesPattern = "|" . preg_quote(config('manage-eloquent.relations_namespace'), "|") . "|";
 
-        $class = get_called_class();
+        $class = static::class;
 
         $reflector = new \ReflectionClass($class);
 
-        static::$_definedRelationships[$class] = collect($reflector->getMethods(\ReflectionMethod::IS_PUBLIC))
+        static::$manageEloquentDefinedRelationships[$class] = collect($reflector->getMethods(\ReflectionMethod::IS_PUBLIC))
             ->reduce(function($carry, \ReflectionMethod $method) use($relationClassesPattern) {
                 if($method->hasReturnType() && preg_match("{$relationClassesPattern}", ($returnType = $method->getReturnType()) )){
                     $carry[$method->name] = (new \ReflectionClass((string) $returnType))->getShortName();
@@ -44,6 +37,7 @@ trait ManageEloquent
 
                 return $carry;
             });
+
     }
 
     /**
@@ -54,9 +48,9 @@ trait ManageEloquent
      */
     public function definedRelations($relations = null): array
     {
-        $class = get_called_class();
+        $class = static::class;
 
-        $definedRelationships = static::$_definedRelationships[$class];
+        $definedRelationships = static::$manageEloquentDefinedRelationships[$class] ?? [];
 
         if($relations){
             if(is_array($relations)){
@@ -67,7 +61,11 @@ trait ManageEloquent
             }
         }
 
-        return array_keys($definedRelationships);
+        try {
+            return array_keys($definedRelationships);
+        } catch (\Exception $e) {
+            dd(static::$manageEloquentDefinedRelationships);
+        }
     }
     /**
      * Get defined relation types.
@@ -77,9 +75,9 @@ trait ManageEloquent
      */
     public function definedRelationsTypes($relations = null): array
     {
-        $class = get_called_class();
+        $class = static::class;
 
-        $definedRelationships = static::$_definedRelationships[$class];
+        $definedRelationships = static::$manageEloquentDefinedRelationships[$class];
 
         if($relations){
             if(is_array($relations)){
@@ -101,9 +99,9 @@ trait ManageEloquent
      */
     public function hasRelation($relationName): bool
     {
-        $class = get_called_class();
+        $class = static::class;
 
-        $definedRelationships = static::$_definedRelationships[$class];
+        $definedRelationships = static::$manageEloquentDefinedRelationships[$class];
 
         return array_key_exists($relationName, $definedRelationships);
     }
@@ -116,9 +114,9 @@ trait ManageEloquent
      */
     public function getRelationType($relationName): string
     {
-        $class = get_called_class();
+        $class = static::class;
 
-        $definedRelationships = static::$_definedRelationships[$class];
+        $definedRelationships = static::$manageEloquentDefinedRelationships[$class];
 
         return array_key_exists($relationName, $definedRelationships) ? $definedRelationships[$relationName] : false;
     }
@@ -174,16 +172,23 @@ trait ManageEloquent
      */
     public function getColumnTypes(): array
     {
-        $columnsKey = get_class($this) . "_column_types";
+        $cacheKey = config('manage-eloquent.cache.column_types.key', 'column_types');
+        $cacheTtl = config('manage-eloquent.cache.column_types.ttl', 86400);
+        $cacheEnabled = config('manage-eloquent.cache.column_types.enabled', true);
+        $cacheKey = static::class . "_" . $cacheKey;
 
-        if (Cache::has($columnsKey)) {
-            return Cache::get($columnsKey);
+        if ($cacheEnabled && Cache::has($cacheKey)) {
+            return Cache::get($cacheKey);
         }else{
             $columnTypes = Collection::make(Schema::getColumns($this->getTable()))
                 ->mapWithKeys(fn ($column, $attr) => [$column['name'] => $column['type_name'] ] )
                 ->toArray();
 
-            Cache::put($columnsKey, $columnTypes);
+            if ($cacheEnabled) {
+                Cache::put($cacheKey, $columnTypes, $cacheTtl);
+            }else if(Cache::has($cacheKey)){
+                Cache::forget($cacheKey);
+            }
 
             return $columnTypes;
         }
