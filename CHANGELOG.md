@@ -2,6 +2,13 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.1.0 - 2025-02-16
+
+### :rocket: Features
+
+- Add configurable caching for column types and relationships by @OoBook in https://github.com/OoBook/manage-eloquent/commit/c3c17a9e0bd771763dccb37d12d4c44e639c86b8
+- Add cache cleaning commands for manage eloquent by @OoBook in https://github.com/OoBook/manage-eloquent/commit/932bb566b86d83f6abe2054a81fbecdd24786164
+
 ## v1.0.3 - 2024-10-01
 
 ### :wrench: Bug Fixes
