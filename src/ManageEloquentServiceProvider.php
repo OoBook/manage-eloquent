@@ -4,6 +4,8 @@ namespace Oobook\Database\Eloquent;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use Oobook\Database\Eloquent\Commands\CacheCleanCommand;
+use Oobook\Database\Eloquent\Commands\CleanColumnsCacheCommand;
 
 class ManageEloquentServiceProvider extends ServiceProvider
 {
@@ -30,5 +32,10 @@ class ManageEloquentServiceProvider extends ServiceProvider
     {
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'manage-eloquent');
+
+        $this->commands([
+            CacheCleanCommand::class,
+            CleanColumnsCacheCommand::class,
+        ]);
     }
 }

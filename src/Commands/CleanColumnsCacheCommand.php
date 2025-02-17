@@ -4,7 +4,7 @@ namespace Oobook\Database\Eloquent\Commands;
 
 use Illuminate\Console\Command;
 
-class CleanCacheCommand extends Command
+class CleanColumnsCacheCommand extends Command
 {
     protected $signature = 'manage-eloquent:clean-columns-cache';
 
