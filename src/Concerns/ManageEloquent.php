@@ -127,10 +127,10 @@ trait ManageEloquent
      * @param array|string|null $columns Optionally limit the check to a set of columns.
      * @return bool
      */
-    public function isSoftDeletable(): bool
+    public static function isSoftDeletable(): bool
     {
         // Model must have the trait
-        return in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses_recursive($this));
+        return in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses_recursive(static::class));
     }
 
     /**
