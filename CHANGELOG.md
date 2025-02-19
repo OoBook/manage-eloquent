@@ -2,6 +2,16 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.2.0 - 2025-02-19
+
+### :rocket: Features
+
+- Register cache cleaning commands in service provider by @OoBook in https://github.com/OoBook/manage-eloquent/commit/8c1a6246d2f4f0d6d9499b1d9237f7af64c3728e
+
+### :recycle: Refactors
+
+- Make isSoftDeletable method static by @OoBook in https://github.com/OoBook/manage-eloquent/commit/40d3f76a1ac4257ebfbdac97f4bcd5b43108a712
+
 ## v1.1.0 - 2025-02-16
 
 ### :rocket: Features
