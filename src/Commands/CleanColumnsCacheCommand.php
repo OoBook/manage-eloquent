@@ -78,7 +78,7 @@ class CleanColumnsCacheCommand extends Command
             $cacheValue = \Illuminate\Support\Facades\Cache::get($cacheKey);
             if ($cacheValue) {
                 \Illuminate\Support\Facades\Cache::forget($cacheKey);
-                if ( $this->verbose() ) {
+                if ( $this->getOutput()->isVerbose() ) {
                     $this->info('Cleaned the cache for ' . $model);
                 }
             }
