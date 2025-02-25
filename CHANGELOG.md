@@ -2,6 +2,12 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.2.1 - 2025-02-25
+
+### :wrench: Bug Fixes
+
+- Improve verbose output in columns cache cleaning command by @OoBook in https://github.com/OoBook/manage-eloquent/commit/e0c4873d42d558236e8f6e889767391318439ffc
+
 ## v1.2.0 - 2025-02-19
 
 ### :rocket: Features
