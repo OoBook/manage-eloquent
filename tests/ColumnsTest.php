@@ -18,7 +18,7 @@ class ColumnsTest extends TestCase
     {
         $model = new Company();
 
-        $columns = $model->getColumns();
+        $columns = $model->getTableColumns();
 
         $this->assertContains('name', $columns);
     }
