@@ -2,6 +2,10 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.2.2 - 2025-05-10
+
+**Full Changelog**: https://github.com/OoBook/manage-eloquent/compare/v1.2.1...v1.2.2
+
 ## v1.2.1 - 2025-02-25
 
 ### :wrench: Bug Fixes
