@@ -86,7 +86,7 @@ $product->hasRelation('tags') // true;
 $product->getRelationType('tags') // \Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 // COLUMNS
-$product->hasTableColumn('name') // true if exists on db table;
+$product->hasColumn('name') // true if exists on db table;
 $product->getTableColumns() // get the list of columns of the table;
 
 // get the list of timestamp columns of the table;
