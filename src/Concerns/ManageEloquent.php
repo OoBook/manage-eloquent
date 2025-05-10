@@ -151,7 +151,7 @@ trait ManageEloquent
      */
     public function getTimestampColumns(): array
     {
-        return array_keys(array_filter($this->getColumnTypes(), fn($val) => $val === 'timestamp' || $val === 'datetime'));
+        return array_keys(array_filter($this->getTableColumnTypes(), fn($val) => $val === 'timestamp' || $val === 'datetime'));
     }
 
     /**
@@ -169,8 +169,19 @@ trait ManageEloquent
      * Get column types.
      *
      * @return array
+     * @deprecated This method will be removed in the next major release. Use getTableColumnTypes instead.
      */
     public function getColumnTypes(): array
+    {
+        return $this->getTableColumnTypes();
+    }
+
+    /**
+     * Get table column types.
+     *
+     * @return array
+     */
+    public function getTableColumnTypes(): array
     {
         $cacheKey = config('manage-eloquent.cache.column_types.key', 'column_types');
         $cacheTtl = config('manage-eloquent.cache.column_types.ttl', 86400);
@@ -195,12 +206,12 @@ trait ManageEloquent
     }
 
     /**
-     * Get column names.
+     * Get table column names.
      *
      * @return array
      */
-    public function getColumns(): array
+    public function getTableColumns(): array
     {
-        return array_keys($this->getColumnTypes());
+        return array_keys($this->getTableColumnTypes());
     }
 }
