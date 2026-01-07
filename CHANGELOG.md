@@ -2,6 +2,24 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.2.3 - 2026-01-07
+
+### :rocket: Features
+
+- implement ManageEloquent trait for enhanced Eloquent model management by @OoBook in https://github.com/OoBook/manage-eloquent/commit/501e30c4ac6b73657038a378a55f1142cc42da19
+
+### :wrench: Bug Fixes
+
+- remove ManageEloquent trait methods to streamline Eloquent model management by @OoBook in https://github.com/OoBook/manage-eloquent/commit/4cf5800560b67f65fea1c95601bf64c854b016e6
+
+### :recycle: Refactors
+
+- optimize definedRelationsTypes method to return short_relationship_class directly by @OoBook in https://github.com/OoBook/manage-eloquent/commit/5a1b65c882c9dbe7c073293f3b597fe46486917e
+
+### :memo: Documentation
+
+- update README.md by @web-flow in https://github.com/OoBook/manage-eloquent/commit/fb135e2b15c061b2c3f171d805fd6f1f113088db
+
 ## v1.2.2 - 2025-05-10
 
 **Full Changelog**: https://github.com/OoBook/manage-eloquent/compare/v1.2.1...v1.2.2
