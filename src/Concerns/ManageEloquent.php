@@ -146,10 +146,10 @@ trait ManageEloquent
 
         if($relations){
             if(is_array($relations)){
-                return Arr::where($definedRelationships, fn($val, $key) => in_array($val['short_relationship_class'], $relations));
+                return array_map(fn($val) => $val['short_relationship_class'], Arr::where($definedRelationships, fn($val, $key) => in_array($val['short_relationship_class'], $relations)));
 
             }else if(is_string($relations)){
-                return Arr::where($definedRelationships, fn($val, $key) => $val['short_relationship_class'] == Str::studly($relations));
+                return array_map(fn($val) => $val['short_relationship_class'], Arr::where($definedRelationships, fn($val, $key) => $val['short_relationship_class'] == Str::studly($relations)));
             }
         }
 
