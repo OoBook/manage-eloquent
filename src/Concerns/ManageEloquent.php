@@ -33,48 +33,52 @@ trait ManageEloquent
 
         static::$manageEloquentDefinedRelationships[$class] = collect($reflector->getMethods(\ReflectionMethod::IS_PUBLIC))
             ->reduce(function($carry, \ReflectionMethod $method) use($relationClassesPattern, $self) {
-                if($method->hasReturnType() && preg_match("{$relationClassesPattern}", ($returnType = $method->getReturnType()) )){
-                    $relationshipMethodName = $method->name;
-                    $relationship = $self->{ $relationshipMethodName }();
-                    $related = $relationship->getRelated();
-                    $relationshipTable = $related->getTable();
-
-                    // if many to many, get the pivot or through table
-                    $hasMiddlemanModel = false;
-                    $middlemanModel = null;
-                    $middlemanTable = null;
-                    $isManyToMany = false;
-
-                    if($relationship instanceof \Illuminate\Database\Eloquent\Relations\MorphToMany){
-                        $isManyToMany = true;
-                        $middlemanTable = $relationship->getTable();
-                    }else if($relationship instanceof \Illuminate\Database\Eloquent\Relations\BelongsToMany){
-                        $isManyToMany = true;
-                        $pivotClass = $relationship->getPivotClass();
-
-                        if(!($pivotClass instanceof \Illuminate\Database\Eloquent\Relations\Pivot)){
+                try {                    
+                    if($method->hasReturnType() && preg_match("{$relationClassesPattern}", ($returnType = $method->getReturnType()) )){
+                        $relationshipMethodName = $method->name;
+                        $relationship = $self->{ $relationshipMethodName }();
+                        $related = $relationship->getRelated();
+                        $relationshipTable = $related->getTable();
+    
+                        // if many to many, get the pivot or through table
+                        $hasMiddlemanModel = false;
+                        $middlemanModel = null;
+                        $middlemanTable = null;
+                        $isManyToMany = false;
+    
+                        if($relationship instanceof \Illuminate\Database\Eloquent\Relations\MorphToMany){
+                            $isManyToMany = true;
+                            $middlemanTable = $relationship->getTable();
+                        }else if($relationship instanceof \Illuminate\Database\Eloquent\Relations\BelongsToMany){
+                            $isManyToMany = true;
+                            $pivotClass = $relationship->getPivotClass();
+    
+                            if(!($pivotClass instanceof \Illuminate\Database\Eloquent\Relations\Pivot)){
+                                $hasMiddlemanModel = true;
+                                $middlemanModel = $pivotClass;
+                            }
+    
+                            $middlemanTable = $relationship->getTable();
+                        }else if($relationship instanceof \Illuminate\Database\Eloquent\Relations\HasManyThrough){
+                            $isManyToMany = true;
                             $hasMiddlemanModel = true;
-                            $middlemanModel = $pivotClass;
+                            $middlemanModel = get_class($relationship->getParent());
+                            $middlemanTable = $relationship->getParent()->getTable();
                         }
-
-                        $middlemanTable = $relationship->getTable();
-                    }else if($relationship instanceof \Illuminate\Database\Eloquent\Relations\HasManyThrough){
-                        $isManyToMany = true;
-                        $hasMiddlemanModel = true;
-                        $middlemanModel = get_class($relationship->getParent());
-                        $middlemanTable = $relationship->getParent()->getTable();
+    
+                        $carry[$method->name] = [
+                            'relationship_class' => (new \ReflectionClass((string) $returnType))->getName(),
+                            'short_relationship_class' => (new \ReflectionClass((string) $returnType))->getShortName(),
+                            'relationship_model' => get_class($relationship->getRelated()),
+                            'relationship_table' => $relationshipTable,
+                            'is_many_to_many' => $isManyToMany,
+                            'has_middleman' => $hasMiddlemanModel,
+                            'middleman_model' => $middlemanModel,
+                            'middleman_table' => $middlemanTable,
+                        ];
                     }
+                } catch (\Exception $e) {
 
-                    $carry[$method->name] = [
-                        'relationship_class' => (new \ReflectionClass((string) $returnType))->getName(),
-                        'short_relationship_class' => (new \ReflectionClass((string) $returnType))->getShortName(),
-                        'relationship_model' => get_class($relationship->getRelated()),
-                        'relationship_table' => $relationshipTable,
-                        'is_many_to_many' => $isManyToMany,
-                        'has_middleman' => $hasMiddlemanModel,
-                        'middleman_model' => $middlemanModel,
-                        'middleman_table' => $middlemanTable,
-                    ];
                 }
 
                 return $carry;
