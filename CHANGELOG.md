@@ -2,6 +2,12 @@
 
 All notable changes to `manage-eloquent` will be documented in this file
 
+## v1.2.4 - 2026-01-12
+
+### :recycle: Refactors
+
+- add error handling in bootManageEloquent method for relationship processing by @OoBook in https://github.com/OoBook/manage-eloquent/commit/67745f2c60d0b69c724ecc4f28aed1842edb0af4
+
 ## v1.2.3 - 2026-01-07
 
 ### :rocket: Features
